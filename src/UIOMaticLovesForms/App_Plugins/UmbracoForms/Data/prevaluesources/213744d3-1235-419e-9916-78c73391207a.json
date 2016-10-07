@@ -1,0 +1,10 @@
+{
+  "id": "213744d3-1235-419e-9916-78c73391207a",
+  "name": "Persons",
+  "settings": {
+    "TypeOfObject": "UIOMaticLovesForms.Pocos.Person, UIOMaticLovesForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "SortColumn": "FirstName",
+    "SortOrder": "Ascending"
+  },
+  "fieldPreValueSourceTypeId": "489921fa-dad4-47a6-9682-55f137631867"
+}

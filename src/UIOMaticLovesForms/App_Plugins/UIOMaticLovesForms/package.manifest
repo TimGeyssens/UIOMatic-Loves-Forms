@@ -1,0 +1,5 @@
+﻿{
+    javascript: [
+	    '~/App_Plugins/UIOMaticLovesForms/FieldSettingTypes/Pickers.TypeOfObject.Controller.js'
+    ]
+}

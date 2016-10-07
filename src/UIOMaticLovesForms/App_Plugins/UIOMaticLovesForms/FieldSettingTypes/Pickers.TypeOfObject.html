@@ -1,0 +1,12 @@
+﻿<div ng-controller="UIOMaticLovesForms.SettingTypes.Pickers.TypeOfObjectController">
+    
+        <select ng-model="setting.value">
+            <option value="">---Please select---</option>
+            <option ng-selected="{{type == setting.value}}"
+                    ng-repeat="type in types"
+                    value="{{type}}">
+                {{type}}
+            </option>
+        </select>
+   
+</div>
