@@ -633,6 +633,7 @@
   <ItemGroup>
     <Compile Include="Pocos\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\UIOMaticDataSource.cs" />
     <Compile Include="Providers\UIOMaticPrevalueSource.cs" />
   </ItemGroup>
   <ItemGroup>
