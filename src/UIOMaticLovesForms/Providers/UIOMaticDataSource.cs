@@ -6,6 +6,9 @@ using System.Web;
 using UIOMatic.Controllers;
 using Umbraco.Forms.Core;
 using Umbraco.Forms.Data.Storage;
+using System.Reflection;
+using UIOMatic.Attributes;
+using Newtonsoft.Json.Linq;
 
 namespace UIOMaticLovesForms.Providers
 {
@@ -31,6 +34,7 @@ namespace UIOMaticLovesForms.Providers
 
         public override Dictionary<object, FormDataSourceField> GetAvailableFields()
         {
+            var properties = Type.GetType(TypeOfObject).GetProperties();
 
            var fields = new Dictionary<object, FormDataSourceField>();
 
@@ -41,10 +45,39 @@ namespace UIOMaticLovesForms.Providers
                 FormDataSourceField fdsf = FormDataSourceField.Create();
                 fdsf.AllowNulls = false;
                 fdsf.AutoIncrement = false;
-                fdsf.Type = prop.GetType();
+                fdsf.Type = Type.GetType(prop.Type);
                 fdsf.Name = prop.Name;
                 fdsf.Key = prop.Key;
                 fdsf.IsMandatory = false;
+                
+
+                var property = properties.FirstOrDefault(x => x.GetCustomAttribute<UIOMaticFieldAttribute>(true) != null && x.GetCustomAttribute<UIOMaticFieldAttribute>(true).Name == prop.Name);
+
+                if (property != null)
+                {
+                   
+
+                    var key = prop.Name;
+
+                    var view = property.GetCustomAttribute<UIOMaticFieldAttribute>(true).View;
+
+                    fdsf.IsForeignKey = view == "dropdown";
+
+                   
+
+                    if (fdsf.IsForeignKey)
+                    {
+                        fdsf.PrevalueKeyField = prop.Config["valueColumn"].ToString();
+                        fdsf.PrevalueSource = prop.Config["typeName"].ToString();
+
+                        
+                        foreach (var obj in pc.GetAllProperties(prop.Config["typeName"].ToString()))
+                        {
+                            fdsf.AvailablePrevalueValueFields.Add(obj.Key);
+                        }
+                    }
+                }
+                   
 
                 fields.Add(fdsf.Key, fdsf);
             }
@@ -54,12 +87,36 @@ namespace UIOMaticLovesForms.Providers
 
         public override Dictionary<object, FormDataSourceField> GetMappedFields()
         {
-            throw new NotImplementedException();
+            return new Dictionary<object, FormDataSourceField>();
         }
 
         public override Dictionary<object, string> GetPrevalues(Field field, Form form)
         {
-            throw new NotImplementedException();
+            Dictionary<object, string> d = new Dictionary<object, string>();
+
+            if (field.DataSourceFieldKey != null)
+            {
+
+                var FieldMappings = form.DataSource.Mappings;
+                var map = FieldMappings.Where(x => x.DataFieldKey.ToString().ToLower() == field.DataSourceFieldKey.ToString().ToLower()).FirstOrDefault();
+
+                if (map != null)
+                {
+                    var controller = new PetaPocoObjectController();
+
+                    var currentType = Type.GetType(map.PrevalueTable);
+
+                    foreach (var prevalue in controller.GetAll(map.PrevalueTable, map.PrevalueValueField, "asc"))
+                    {
+
+                        d.Add(currentType.GetProperty(map.PrevalueKeyfield).GetValue(prevalue, null)
+                            , currentType.GetProperty(map.PrevalueValueField).GetValue(prevalue, null).ToString());
+                    }
+                    
+
+                }
+            }
+            return d;
         }
 
         public override List<Record> GetRecords(Form form, int page, int maxItems, object sortByField, Sorting Order)
