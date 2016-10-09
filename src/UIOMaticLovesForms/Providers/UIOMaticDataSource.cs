@@ -75,6 +75,8 @@ namespace UIOMaticLovesForms.Providers
                         {
                             fdsf.AvailablePrevalueValueFields.Add(obj.Key);
                         }
+
+                        fdsf.AvailablePrevalueValueFields.Add("ToString()");
                     }
                 }
                    
@@ -106,11 +108,14 @@ namespace UIOMaticLovesForms.Providers
 
                     var currentType = Type.GetType(map.PrevalueTable);
 
-                    foreach (var prevalue in controller.GetAll(map.PrevalueTable, map.PrevalueValueField, "asc"))
+                    var sortColumn = map.PrevalueValueField == "ToString()" ? string.Empty : map.PrevalueValueField;
+
+                    foreach (var prevalue in controller.GetAll(map.PrevalueTable, sortColumn, "asc"))
                     {
+                        var val = map.PrevalueValueField == "ToString()" ? prevalue.ToString() : currentType.GetProperty(map.PrevalueValueField).GetValue(prevalue, null).ToString();
 
                         d.Add(currentType.GetProperty(map.PrevalueKeyfield).GetValue(prevalue, null)
-                            , currentType.GetProperty(map.PrevalueValueField).GetValue(prevalue, null).ToString());
+                            , val);
                     }
                     
 
