@@ -21,7 +21,7 @@ namespace UIOMaticLovesForms.Providers
             this.Name = "UIOMatic Poco";
             this.Description = "Sends records to a db table";
             this.SupportsGetRecords = false;
-            this.SupportsPrevalues = false;
+            this.SupportsPrevalues = true;
         }
 
         [Umbraco.Forms.Core.Attributes.Setting("Type Of Object", description = "Type of the poco", view = "~/App_Plugins/UIOMaticLovesForms/FieldSettingTypes/Pickers.TypeOfObject.html")]
