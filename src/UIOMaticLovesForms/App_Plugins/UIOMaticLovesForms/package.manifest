@@ -1,5 +1,6 @@
 ﻿{
     javascript: [
-	    '~/App_Plugins/UIOMaticLovesForms/FieldSettingTypes/Pickers.TypeOfObject.Controller.js'
+	    '~/App_Plugins/UIOMaticLovesForms/FieldSettingTypes/Pickers.TypeOfObject.Controller.js',
+		'~/App_Plugins/UIOMaticLovesForms/FieldSettingTypes/Mappers.Poco.Controller.js'
     ]
 }
