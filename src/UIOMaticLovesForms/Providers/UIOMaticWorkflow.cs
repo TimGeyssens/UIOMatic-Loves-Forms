@@ -8,6 +8,7 @@ using UIOMatic.Controllers;
 using UIOMaticLovesForms.Models;
 using Umbraco.Forms.Core;
 using Umbraco.Forms.Core.Enums;
+using Umbraco.Forms.Core.Extensions;
 
 namespace UIOMaticLovesForms.Providers
 {
@@ -41,7 +42,7 @@ namespace UIOMaticLovesForms.Providers
                 if (string.IsNullOrEmpty(map.Field) == false)
                     val = record.RecordFields[new Guid(map.Field)].ValuesAsString(false);
 
-                mappings.Add(map.Key, val);
+                mappings.Add(map.Key, val.ParsePlaceHolders());
             }
 
             var inst = new ExpandoObject() as IDictionary<string, Object>;

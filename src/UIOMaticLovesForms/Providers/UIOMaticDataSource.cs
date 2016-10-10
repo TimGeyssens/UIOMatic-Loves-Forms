@@ -61,7 +61,7 @@ namespace UIOMaticLovesForms.Providers
 
                     var view = property.GetCustomAttribute<UIOMaticFieldAttribute>(true).View;
 
-                    fdsf.IsForeignKey = view == "dropdown";
+                    fdsf.IsForeignKey = view == "dropdown" || view == "radiobuttonlist" || view == "checkboxlist";
 
                    
 

@@ -4,7 +4,7 @@
 <span class="checkboxlist" id="@Model.Id">
 @foreach (Umbraco.Forms.Mvc.Models.PrevalueViewModel pv in Model.PreValues)  
 {
-    <input type="checkbox" name="@Model.Name" id="@string.Concat(Model.Id,"_",i)" value="@pv.Value" 
+    <input type="checkbox" name="@Model.Name" id="@string.Concat(Model.Id,"_",i)" value="@pv.Id" 
     @if (Model.Mandatory) {<text>data-val="true" data-val-requiredlist="@Model.RequiredErrorMessage"</text>}
     @if (Model.ContainsValue(pv.Value)){<text>checked="checked"</text>}/>
     

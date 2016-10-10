@@ -7,6 +7,7 @@ using UIOMatic.Controllers;
 using Umbraco.Core.Persistence;
 using Umbraco.Core.Persistence.DatabaseAnnotations;
 using Umbraco.Forms.Core;
+using Umbraco.Forms.Core.Extensions;
 
 namespace UIOMaticLovesForms.Providers
 {
@@ -35,6 +36,8 @@ namespace UIOMaticLovesForms.Providers
 
         public override List<PreValue> GetPreValues(Field field, Form form)
         {
+            this.prevalues.Clear();
+
             var currentType = Type.GetType(TypeOfObject);
 
             var primaryKeyColum = "id";
@@ -58,7 +61,7 @@ namespace UIOMaticLovesForms.Providers
             {
                 PreValue pv = new PreValue();
                 pv.Id = currentType.GetProperty(primaryKeyColum).GetValue(prevalue, null);
-                pv.Value = prevalue.ToString();
+                pv.Value = prevalue.ToString().ParsePlaceHolders();
                 pv.SortOrder = sortOrderCounter;
 
                 //Add it to the list

@@ -17,6 +17,7 @@ namespace UIOMaticLovesForms.Pocos
         public Dog() { }
 
         [UIOMaticIgnoreField]
+        [UIOMaticIgnoreFromListView]
         [PrimaryKeyColumn(AutoIncrement = true)]
         public int Id { get; set; }
 
@@ -26,6 +27,8 @@ namespace UIOMaticLovesForms.Pocos
         [UIOMaticField("Is castrated", "Has the dog been castrated")]
         public bool IsCastrated { get; set; }
 
+        [UIOMaticField("Birthday", "When was the dog born", View = "date")]
+        public DateTime Birthday { get; set; }
 
         [UIOMaticField("Owner", "Select the owner of the dog", View = "dropdown",
             Config = "{'typeName': 'UIOMaticLovesForms.Pocos.Person, UIOMaticLovesForms', 'valueColumn': 'Id', 'sortColumn': 'FirstName', 'textTemplate' : 'FirstName + \" \"+ LastName '}")]
