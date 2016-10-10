@@ -1,0 +1,39 @@
+﻿<div ng-controller="UIOMaticLovesForms.SettingTypes.Mappers.PocoController">
+
+    <select ng-model="typeOfObject" ng-options="type for type in types" ng-change="setTypeOfObject()">
+        <option value="">-- choose type --</option>
+    </select>
+
+
+    <div class="umb-forms__save-as-node" ng-show="typeOfObject">
+
+
+        <div class="umb-forms__save-as-node__head">
+            <div class="umb-forms__save-as-node-field">
+                <strong><small>Property</small></strong>
+            </div>
+            <div class="umb-forms__save-as-node-field">
+                <strong><small>Field value</small></strong>
+            </div>
+            <div class="umb-forms__save-as-node-field">
+                <strong><small>Static value</small></strong>
+            </div>
+        </div>
+
+
+        <div class="umb-forms__save-as-node-group" ng-repeat="property in properties">
+            <div class="umb-forms__save-as-node-field">
+                <small>{{property.Key}}</small>
+            </div>
+
+            <div class="umb-forms__save-as-node-field">
+                <select class="-full-width" ng-model="property.field" ng-options="field.id as field.value for field in fields" ng-change="setValue()"></select>
+            </div>
+
+            <div class="umb-forms__save-as-node-field">
+                <input class="-full-width" type="text" ng-model="property.staticValue" placeholder="Static value" ng-change="setValue()" />
+            </div>
+        </div>
+    </div>
+
+</div>
