@@ -9,7 +9,7 @@ using Umbraco.Core.Persistence.DatabaseAnnotations;
 
 namespace UIOMaticLovesForms.Pocos
 {
-    [UIOMatic("People", "icon-users", "icon-user")]
+    [UIOMatic("Directors", "icon-users", "icon-user")]
     [TableName("People")]
     public class Person : IUIOMaticModel
     {

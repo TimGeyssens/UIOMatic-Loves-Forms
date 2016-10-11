@@ -403,6 +403,13 @@
     <Content Include="App_Plugins\UIOMatic\package.manifest" />
     <Content Include="App_Plugins\UIOMaticLovesForms\package.manifest" />
     <Content Include="App_Plugins\UIOMaticLovesForms\FieldSettingTypes\Mappers.Poco.Controller.js" />
+    <Content Include="Views\BlogOverview.cshtml" />
+    <Content Include="Views\BlogPost.cshtml" />
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Master.cshtml" />
+    <Content Include="Views\TextPage.cshtml" />
+    <Content Include="Views\Partials\BottomNavigation.cshtml" />
+    <Content Include="Views\Partials\MainNavigation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -634,6 +641,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Attributes\CreateTableAttribute.cs" />
     <Compile Include="Models\PocoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\PropertyMapping.cs" />
